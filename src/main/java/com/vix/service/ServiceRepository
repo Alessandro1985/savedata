@@ -1,0 +1,24 @@
+package com.vix.service;
+
+import com.codahale.metrics.annotation.Timed;
+import org.jooq.DSLContext;
+import org.springframework.stereotype.Repository;
+
+/**
+ * ServiceRepository interacts with the database to store statusInfo instances.
+ */
+@Repository
+public class ServiceRepository {
+    private final DSLContext jooq;
+    public ServiceRepository(DSLContext jooq) {
+        this.jooq = jooq;
+    }
+
+    @Timed
+    public void create(Response.StatusType statusInfo) {
+        LOGGER.debug("Inserting new status into DB");
+        jooq.insertInto(TABLE, STATUS).values(statusInfo).execute();
+        LOGGER.debug("Inserted new status into DB");
+    }
+
+}

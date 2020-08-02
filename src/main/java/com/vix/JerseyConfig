@@ -1,0 +1,23 @@
+package com.vix;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * Configuration class for savedata service using Jersey
+ */
+@Component
+public class JerseyConfig {
+    private final ConfigServiceHealthCheck configServiceHealthCheck;
+    private final ClientInfoServiceHealthCheck clientInfoServiceHealthCheck;
+
+    /**
+     * Builds the Jersey configuration with the health check for dataservice
+     * @param serviceHealthCheck         the health check for the service
+     */
+    public JerseyConfig(ServiceHealthCheck serviceHealthCheck) {
+        this.serviceHealthCheck = serviceHealthCheck;
+
+    @Override
+    public void registerHealthChecks(HealthCheckRegistry healthCheckRegistry) {
+        healthCheckRegistry.register("service", serviceHealthCheck);
+    }

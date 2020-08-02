@@ -1,0 +1,33 @@
+package com.vix.service;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+/**
+ * Service that handles the logic of save data service
+ */
+@Service
+public class SaveDataService {
+    private final DataRepository dataRepository;
+
+    /**
+     * Constructor
+     * @param dataRepository
+     */
+    public SaveDataService(ServiceRepository dataRepository) {
+        this.configRepository = configRepository;
+    }
+
+    /**
+     * Save data
+     * @param statusInfo
+     */
+    public void create(Response.StatusType statusInfo) {
+        configRepository.create(statusInfo);
+    }
+}
